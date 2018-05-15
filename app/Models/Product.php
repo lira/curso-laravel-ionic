@@ -5,23 +5,26 @@ namespace Lira\Course\Delivery\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Category
+ * Class Product
  * @package Lira\Course\Delivery\Models
  */
-class Category extends Model
+class Product extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
+        'category_id',
         'name',
+        'description',
+        'price',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function products()
+    public function category()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Category::class);
     }
 }

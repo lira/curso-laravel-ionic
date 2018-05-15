@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Lira\Course\Delivery\Models\Client;
 use Lira\Course\Delivery\Models\User;
 
 class UserTableSeeder extends Seeder
@@ -12,6 +13,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 10)->create();
+        factory(User::class, 10)->create()->each(function ($user) {
+            $user->client()->save(
+                factory(Client::class)->make()
+            );
+        });
     }
 }
